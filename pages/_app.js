@@ -7,15 +7,15 @@ import {
 import { useRouter } from 'next/router';
 import '../styles/globals.css';
 import Layout from '../components/Layout';
-
-const frontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API;
+import Script from 'next/script';
 
 function MyApp({ Component, pageProps }) {
   const { pathname } = useRouter();
-  const isPublicRoute = ['/'].includes(pathname);
+  const isPublicRoute = ['/', '/movie/[id]'].includes(pathname);
   return (
     <Layout>
-      <ClerkProvider frontendApi={frontendApi}>
+      <Script src='https://app.embed.im/snow.js' />
+      <ClerkProvider>
         {isPublicRoute && <Component {...pageProps} />}
         {!isPublicRoute && (
           <>

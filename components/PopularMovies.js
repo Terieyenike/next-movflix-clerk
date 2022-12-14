@@ -19,7 +19,7 @@ const PopularMovies = ({ movies, title }) => {
       <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6'>
         {React.Children.toArray(
           movies.results.map((movie) => (
-            <div key={movie.id} className='bg-white drop-shadow-md'>
+            <div className='bg-white drop-shadow-md'>
               <Link href={{ pathname: `movie/${movie.id}` }}>
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
