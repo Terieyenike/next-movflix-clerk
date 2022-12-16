@@ -1,34 +1,18 @@
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  RedirectToSignIn,
-} from '@clerk/nextjs';
-import { useRouter } from 'next/router';
-import '../styles/globals.css';
-import Layout from '../components/Layout';
+import { ClerkProvider } from '@clerk/nextjs';
 import Script from 'next/script';
 
+import Layout from '../components/Layout';
+
+import '../styles/globals.css';
+
 function MyApp({ Component, pageProps }) {
-  const { pathname } = useRouter();
-  const isPublicRoute = ['/', '/movie/[id]'].includes(pathname);
   return (
-    <Layout>
-      <Script src='https://app.embed.im/snow.js' />
-      <ClerkProvider>
-        {isPublicRoute && <Component {...pageProps} />}
-        {!isPublicRoute && (
-          <>
-            <SignedIn>
-              <Component {...pageProps} />
-            </SignedIn>
-            <SignedOut>
-              <RedirectToSignIn />
-            </SignedOut>
-          </>
-        )}
-      </ClerkProvider>
-    </Layout>
+    <ClerkProvider>
+      <Layout>
+        <Script src='https://app.embed.im/snow.js' />
+        <Component {...pageProps} />
+      </Layout>
+    </ClerkProvider>
   );
 }
 
