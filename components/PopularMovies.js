@@ -15,25 +15,28 @@ const PopularMovies = ({ movies, title }) => {
   }
   return (
     <section>
-      <h1 className='mb-5 font-bold text-lg'>{title}</h1>
-      <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6'>
+      <h1 className='mb-5 text-lg font-bold'>{title}</h1>
+      <div className='grid gap-6 md:grid-cols-3 lg:grid-cols-4'>
         {React.Children.toArray(
           movies.results.map((movie) => (
-            <div className='bg-white drop-shadow-md'>
-              <Link href={{ pathname: `movie/${movie.id}` }}>
+            <Link
+              href={{ pathname: `movie/${movie.id}` }}
+              className='bg-white shadow-md focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500'
+            >
+              <div className='overflow-hidden'>
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
                   width={300}
                   height={300}
-                  className='w-full'
+                  className='w-full transition-transform duration-300 ease-in-out	hover:scale-105'
                 />
-              </Link>
-              <div className='p-5'>
-                <p className='font-bold'>{movie.title}</p>
+              </div>
+              <div className='p-5 text-base'>
+                <p className='pointer-events-none font-bold'>{movie.title}</p>
                 <span>{reformatDate(movie.release_date)}</span>
               </div>
-            </div>
+            </Link>
           ))
         )}
       </div>
